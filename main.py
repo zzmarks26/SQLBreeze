@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routes import transpile
+from routes import transpile, metadata
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -12,6 +12,7 @@ app.add_middleware(
 )
 
 app.include_router(transpile.router, prefix="/sqlbreeze")
+app.include_router(metadata.router, prefix="/sqlbreeze")
 
 @app.get("/")
 def read_root():
