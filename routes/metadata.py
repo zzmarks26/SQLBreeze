@@ -7,7 +7,7 @@ router = APIRouter()
 class QueryInput(BaseModel):
     query: str
 
-@router.post("/metadata/")
+@router.post("/metadata")
 async def extract_metadata(query_input: QueryInput):
     try:
         # Parse the SQL query
