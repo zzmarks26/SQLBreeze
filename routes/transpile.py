@@ -12,7 +12,7 @@ class TranspileRequest(BaseModel):
     query: str
     source_dialect: str
     target_dialect: str
-    pretty: bool = False 
+    pretty: bool = True 
 
     @field_validator("source_dialect", "target_dialect")
     def validate_dialect(cls, v):
