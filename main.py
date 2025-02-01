@@ -20,6 +20,3 @@ app.include_router(format.router, prefix="/sqlbreeze")
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the SQLBreeze API Service"}
-
-
-#TODO Add route for formatting SQL

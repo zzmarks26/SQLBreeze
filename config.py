@@ -1,5 +1,3 @@
-# sqlbreeze/app/config.py
-
 from typing import Set
 
 SUPPORTED_DIALECTS: Set[str] = {
