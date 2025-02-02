@@ -1,7 +1,6 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 import sqlglot
-from error import error_handler
 
 router = APIRouter()
 
@@ -9,7 +8,6 @@ class QueryInput(BaseModel):
     query: str
 
 @router.post("/metadata")
-@error_handler
 async def extract_metadata(query_input: QueryInput):
     expression = sqlglot.parse_one(query_input.query)
 
@@ -30,10 +28,11 @@ async def extract_metadata(query_input: QueryInput):
             "having": expression.find_all(sqlglot.expressions.Having),
             "distinct": expression.find_all(sqlglot.expressions.Distinct),
             "case": expression.find_all(sqlglot.expressions.Case),
-            "literals": expression.find_all(sqlglot.expressions.Literal),
-        }
+            "literals": expression.find_all(sqlglot.expressions.Literal)            
+            }
 
-    # Format metadata as strings
+    # Format metadata as strings for response
     formatted_metadata = {key: [str(item) for item in value] for key, value in metadata.items()}
 
     return {"metadata": formatted_metadata}
+
